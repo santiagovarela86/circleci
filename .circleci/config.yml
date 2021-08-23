@@ -18,7 +18,7 @@ jobs:
         - terraform/install
         - azure-cli/install
         - azure-cli/login-with-service-principal
-#        - terraform/init:
+        - terraform/init
 #            path: .
 #        - terraform/validate:
 #            path: .
