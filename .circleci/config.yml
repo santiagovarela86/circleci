@@ -16,8 +16,6 @@ jobs:
             command: |
               echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
               echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
-              echo $TF_VAR_Azure_AppID
-              echo $TF_VAR_Azure_PW
         - checkout
         - terraform/install
 #        - terraform/init:
@@ -26,7 +24,7 @@ jobs:
 #            path: .
 #        - terraform/fmt:
 #            path: .
-#        - terraform/plan:
+        - terraform/plan
 #            path: .
 #        - terraform/apply:
 #            path: .
