@@ -7,7 +7,12 @@ orbs:
 jobs:
   base_job:
     docker:
-      - image: cimg/base:2021.07 
+      - image: cimg/base:2021.07
+  steps:
+      - azure-cli/install
+      - run:
+          command: az -v
+          name: Verify Azure CLI is installed
 
 workflows:
   plan_apply:
