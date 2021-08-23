@@ -12,7 +12,9 @@ jobs:
         - azure-cli/install
         - azure-cli/login-with-service-principal
         - checkout
+        - terraform/install
         - terraform/init:
+            path: .
         - terraform/validate:
             path: .
         - terraform/fmt:
