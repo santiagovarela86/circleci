@@ -38,8 +38,8 @@ resource "azurerm_kubernetes_cluster" "default" {
   }
 
   service_principal {
-    client_id     = $AZURE_SP
-    client_secret = $AZURE_SP_PASSWORD
+    client_id     = ${AZURE_SP}
+    client_secret = ${AZURE_SP_PASSWORD}
   }
 
   role_based_access_control {
