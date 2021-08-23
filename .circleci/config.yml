@@ -5,14 +5,22 @@ orbs:
   terraform: circleci/terraform@2.1.0
 
 jobs:
-  base_job:
+  azure_cli_install:
     docker:
       - image: cimg/base:2021.07
     steps:
         - azure-cli/install
+        
+  azure_cli_login:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
         - azure-cli/login-with-service-principal
 
 workflows:
-  plan_apply:
+  workflow:
     jobs:
-      - base_job
+      - azure_cli_install
+      - azure_cli_login:
+        requires: 
+          - azure_cli_install
