@@ -22,5 +22,5 @@ workflows:
     jobs:
       - azure_cli_install
       - azure_cli_login:
-        requires: 
-          - azure_cli_install
+          requires: 
+            - azure_cli_install
