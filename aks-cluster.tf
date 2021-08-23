@@ -38,8 +38,8 @@ resource "azurerm_kubernetes_cluster" "default" {
   }
 
   service_principal {
-    client_id     = ${AZURE_SP}
-    client_secret = ${AZURE_SP_PASSWORD}
+    client_id     = var.Azure_AppID
+    client_secret = var.Azure_PW
   }
 
   role_based_access_control {
@@ -51,11 +51,11 @@ resource "azurerm_kubernetes_cluster" "default" {
   }
 }
 
-variable "appId" {
+variable "Azure_AppID" {
   description = "Azure Kubernetes Service Cluster service principal"
 }
 
-variable "password" {
+variable "Azure_PW" {
   description = "Azure Kubernetes Service Cluster password"
 }
 
