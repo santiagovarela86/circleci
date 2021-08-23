@@ -11,6 +11,19 @@ jobs:
     steps:
         - azure-cli/install
         - azure-cli/login-with-service-principal
+        - checkout
+        - terraform/init:
+            path: .
+        - terraform/validate:
+            path: .
+        - terraform/fmt:
+            path: .
+        - terraform/plan:
+            path: .
+        - terraform/apply:
+            path: .
+        - terraform/destroy:
+            path: .
 
 workflows:
   workflow:
