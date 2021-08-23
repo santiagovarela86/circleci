@@ -16,8 +16,8 @@ jobs:
               echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
         - checkout
         - terraform/install
-        - azure-cli/install
-        - azure-cli/login-with-service-principal
+#        - azure-cli/install
+#        - azure-cli/login-with-service-principal
         - terraform/init
 #            path: .
 #        - terraform/validate:
