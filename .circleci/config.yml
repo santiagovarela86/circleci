@@ -12,10 +12,10 @@ jobs:
         - azure-cli/install
         - azure-cli/login-with-service-principal
         - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
+            name: Update PATH and Define Environment Variable at Runtime
+            command: |
+              echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
+              echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
         - checkout
         - terraform/install
         - terraform/init:
