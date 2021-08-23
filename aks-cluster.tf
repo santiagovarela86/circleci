@@ -5,6 +5,13 @@ terraform {
       version = "2.66.0"
     }
   }
+  
+  backend "azurerm" {
+    resource_group_name  = var.storage_account_resource_group
+    storage_account_name = var.storage_account_name
+    container_name       = var.storage_account_container_name
+    key                  = var.storage_account_file_name
+  }
 
   required_version = ">= 0.14"
 }
@@ -57,6 +64,22 @@ variable "Azure_AppID" {
 
 variable "Azure_PW" {
   description = "Azure Kubernetes Service Cluster password"
+}
+
+variable "storage_account_resource_group" {
+  description = "Resource Group where the Storage Account for the TF state is located"
+}
+
+variable "storage_account_name" {
+  description = "Storage Account name"
+}
+
+variable "storage_account_container_name" {
+  description = "Storage Account container name"
+}
+
+variable "terraform_state_file_name" {
+  description = "Terraform State file name"
 }
 
 output "resource_group_name" {
