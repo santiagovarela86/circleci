@@ -1,46 +1,14 @@
 version: 2.1
 
 jobs:
-  plan-apply:
-    working_directory: /tmp/project
+  base_job:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:latest
-    steps:
-      - run:
-          name: Install AZ Cli
-          command: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-      - attach_workspace:
-          at: .
-      - checkout
-      - run:
-          name: terraform init & plan
-          command: |
-            terraform init -input=false
-            terraform plan -out tfapply -var-file terraform.tfvars
-      - persist_to_workspace:
-          root: .
-          paths:
+      - image: cimg/base:2021.04
             - .
 
-  apply:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:latest
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: terraform
-          command: |
-            terraform apply -auto-approve tfapply
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+  
 
 workflows:
   plan_apply:
     jobs:
-      - plan-apply
-      - apply:
-          requires:
-            - plan-apply
+      - base_job
