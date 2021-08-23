@@ -18,12 +18,12 @@ jobs:
               echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
         - checkout
         - terraform/install
-        - terraform/init:
-            path: .
-        - terraform/validate:
-            path: .
-        - terraform/fmt:
-            path: .
+#        - terraform/init:
+#            path: .
+#        - terraform/validate:
+#            path: .
+#        - terraform/fmt:
+#            path: .
         - terraform/plan:
             path: .
         - terraform/apply:
