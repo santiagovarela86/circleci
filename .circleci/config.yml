@@ -12,6 +12,10 @@ jobs:
         - run:
             name: Update PATH and Define Environment Variable at Runtime
             command: |
+              echo 'export ARM_CLIENT_ID=$AZURE_SP' >> $BASH_ENV
+              echo 'export ARM_CLIENT_SECRET=$AZURE_SP_PASSWORD' >> $BASH_ENV
+              echo 'export ARM_SUBSCRIPTION_ID=$AZURE_SUB' >> $BASH_ENV
+              echo 'export ARM_TENANT_ID=$AZURE_TENANT' >> $BASH_ENV
               echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
               echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
         - checkout
