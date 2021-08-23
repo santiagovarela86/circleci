@@ -9,8 +9,6 @@ jobs:
     docker:
       - image: cimg/base:2021.07
     steps:
-        - azure-cli/install
-        - azure-cli/login-with-service-principal
         - run:
             name: Update PATH and Define Environment Variable at Runtime
             command: |
@@ -18,6 +16,8 @@ jobs:
               echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
         - checkout
         - terraform/install
+        - azure-cli/install
+        - azure-cli/login-with-service-principal
 #        - terraform/init:
 #            path: .
 #        - terraform/validate:
