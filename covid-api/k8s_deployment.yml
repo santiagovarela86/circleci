@@ -17,6 +17,7 @@ spec:
       containers:
       - name: covid-api
         image: santiagovarela86/k8s_repository_covid-api:latest
-        command: ["bash ./java/wait-for-it.sh covid-sql-devops-playground.database.windows.net:1433 -s -t 600 -- java -jar /java/application.jar"]
+        #command: ["bash ./java/wait-for-it.sh covid-sql-devops-playground.database.windows.net:1433 -s -t 600 -- java -jar /java/application.jar"]
+        command: ["java -jar /java/application.jar"]
         ports:
         - containerPort: 80
