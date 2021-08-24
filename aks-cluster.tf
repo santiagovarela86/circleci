@@ -5,6 +5,8 @@ terraform {
       version = "2.66.0"
     }
   }
+  
+  backend "local" {}
 
   required_version = ">= 0.14"
 }
