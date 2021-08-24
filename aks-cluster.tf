@@ -12,15 +12,12 @@ terraform {
   required_version = ">= 0.14"
 }
 
-#resource "random_pet" "prefix" {}
-
 provider "azurerm" {
   features {
   }
 }
 
 resource "azurerm_resource_group" "default" {
-  #name     = "${random_pet.prefix.id}-rg"
   name     = "akstest-rg"
   location = "East US 2"
 
@@ -30,11 +27,9 @@ resource "azurerm_resource_group" "default" {
 }
 
 resource "azurerm_kubernetes_cluster" "default" {
-  #name                = "${random_pet.prefix.id}-aks"
   name                = "akstest-aks"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
-  #dns_prefix          = "${random_pet.prefix.id}-k8s"
   dns_prefix          = "akstest-dns"
 
   default_node_pool {
