@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   terraform: circleci/terraform@2.1.0
   kubernetes: circleci/kubernetes@0.12.0
+  azure-aks: circleci/azure-aks@0.2.1
 
 jobs:
   infra_creation:
@@ -44,11 +45,27 @@ jobs:
       - terraform/install
       - terraform/destroy:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
+  
+  create-api-deployment:
+    executor: azure-aks/default
+    steps:
+      - checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          resource-group: COVIDDEMO
+          cluster-name: covid-aks
+          install-kubectl: true
+          perform-login: true
+      - kubernetes/create-or-update-resource:
+          resource-file-path: covid-api/deployment.yaml
+          resource-name: deployment/covid-api-deployment
 
 workflows:
   workflow:
     jobs:
       - infra_creation
-      - infra_deletion:
+      - create-api-deployment:
           requires:
-            -  infra_creation
+            - infra_creation
+#      - infra_deletion:
+#          requires:
+#            -  infra_creation
