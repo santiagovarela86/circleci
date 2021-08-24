@@ -21,6 +21,8 @@ jobs:
       - terraform/install
       - terraform/apply:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
+      - terraform/destroy:
+          backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
 
 workflows:
   workflow:
