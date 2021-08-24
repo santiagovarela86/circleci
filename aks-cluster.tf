@@ -6,7 +6,8 @@ terraform {
     }
   }
   
-  backend "local" {}
+  backend "azurerm" {
+  }
 
   required_version = ">= 0.14"
 }
@@ -14,7 +15,8 @@ terraform {
 #resource "random_pet" "prefix" {}
 
 provider "azurerm" {
-  features {}
+  features {
+  }
 }
 
 resource "azurerm_resource_group" "default" {
