@@ -53,6 +53,7 @@ resource "azurerm_mssql_database" "coviddemo" {
   server_id      = azurerm_mssql_server.coviddemo.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   sku_name       = "Basic"
+  max_size_gb    = 32
 
   tags = {
     environment = "Covid Demo"
