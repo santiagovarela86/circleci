@@ -82,7 +82,6 @@ workflows:
       - create-k8s-resources:
           requires:
             - build-api-container
-
-#      - infra_deletion:
-#          requires:
-#            -  infra_creation
+      - infra_deletion:
+          requires:
+            -  infra_creation
