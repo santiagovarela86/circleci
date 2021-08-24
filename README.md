@@ -1,5 +1,9 @@
 # DevOps Playground Repo
 
-Created this repository to try out multiple things at once such as CircleCI, Kubernetes (Azure's AKS), Terraform.
+I've created this repository to try out multiple DevOps tools at once such as CircleCI, Kubernetes (Azure's AKS), Terraform, Docker, etc.
 
-The idea is to deploy both the infrastructure and the code of a  test application to the Cloud using entirely Source Control (git).
+The idea is to deploy both the infrastructure and the code of a test application to the Cloud using entirely Source Control (git).
+
+The application is a COVID tracking tool that was the practical assignment for a University course named "Advanced Building Software Techniques".
+
+Link to the original repo -> https://gitlab.com/santiagovarela.86/integracion-covid-19
