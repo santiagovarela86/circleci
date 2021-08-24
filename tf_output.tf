@@ -19,6 +19,10 @@ output "sql_server_name" {
   value = azurerm_mssql_server.coviddemo.name
 }
 
+output "sql_server_fqdn" {
+  value = azurerm_mssql_server.coviddemo.fully_qualified_domain_name
+}
+
 output "sql_db_name" {
   value = azurerm_mssql_database.coviddemo.name
 }
