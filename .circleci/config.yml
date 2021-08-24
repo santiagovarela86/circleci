@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-#  azure-cli: circleci/azure-cli@1.2.0
   terraform: circleci/terraform@2.1.0
 
 jobs:
@@ -20,21 +19,10 @@ jobs:
             echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
       - checkout
       - terraform/install
-#        - azure-cli/install
-#        - azure-cli/login-with-service-principal
       - terraform/init
-#            path: .
-#        - terraform/validate:
-#            path: .
-#        - terraform/fmt:
-#            path: .
-      - terraform/plan
+      - terraform/plan:
           backend_config: resource_group_name=$SA_RG, storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY
-#            path: .
-#        - terraform/apply:
-#            path: .
-#        - terraform/destroy:
-#            path: .
+#      - terraform/apply:
 
 workflows:
   workflow:
