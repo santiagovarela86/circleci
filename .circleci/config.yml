@@ -76,12 +76,12 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-      - build-api-container:
-          requires:
-            - infra_creation
+#      - build-api-container:
+#          requires:
+#            - infra_creation
       - create-k8s-resources:
           requires:
             - build-api-container
-      - infra_deletion:
-          requires:
-            -  infra_creation
+#      - infra_deletion:
+#          requires:
+#            -  create-k8s-resources

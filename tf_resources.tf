@@ -29,6 +29,11 @@ resource "azurerm_kubernetes_cluster" "coviddemo" {
     enabled = true
   }
 
+  network_profile {
+    network_plugin    = "kubenet"
+    load_balancer_sku = "Standard"
+  }
+
   tags = {
     environment = "Covid Demo"
   }
