@@ -7,3 +7,5 @@ The idea is to deploy both the infrastructure and the code of a test application
 The application is a COVID tracking tool that was the practical assignment for a University course named "Advanced Building Software Techniques".
 
 Link to the original repo -> https://gitlab.com/santiagovarela.86/integracion-covid-19
+
+Terraform state is kept in a separate Azure Storage Account.

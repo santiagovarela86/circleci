@@ -35,7 +35,7 @@ resource "azurerm_kubernetes_cluster" "coviddemo" {
 }
 
 resource "azurerm_mssql_server" "coviddemo" {
-  name                         = "covid-sql"
+  name                         = "covid-sql-devops-playground"
   resource_group_name          = azurerm_resource_group.coviddemo.name
   location                     = azurerm_resource_group.coviddemo.location
   version                      = "12.0"
@@ -49,7 +49,7 @@ resource "azurerm_mssql_server" "coviddemo" {
 }
 
 resource "azurerm_mssql_database" "coviddemo" {
-  name           = "covid-sql-db"
+  name           = "covid-sql-db-devops-playground"
   server_id      = azurerm_mssql_server.coviddemo.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   sku_name       = "Basic"
