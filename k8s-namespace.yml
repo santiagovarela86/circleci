@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: covid-k8s-test
+  labels:
+    name: covid-k8s-test

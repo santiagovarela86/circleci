@@ -55,7 +55,7 @@ jobs:
           echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
           docker push santiagovarela86/k8s_repository_covid-api:latest          
 
-  create-api-deployment:
+  create-k8s-resources:
     executor: azure-aks/default
     steps:
       - checkout
@@ -65,7 +65,10 @@ jobs:
           install-kubectl: true
           perform-login: true
       - kubernetes/create-or-update-resource:
-          resource-file-path: covid-api/deployment.yml
+          resource-file-path: k8s-namespace.yml
+          resource-name: namespaces/covid-k8s-test
+      - kubernetes/create-or-update-resource:
+          resource-file-path: covid-api/k8s-deployment.yml
           resource-name: deployment/covid-api-deployment
           namespace: covid-k8s-test
 
@@ -76,7 +79,7 @@ workflows:
       - build-api-container:
           requires:
             - infra_creation
-      - create-api-deployment:
+      - create-k8s-resources:
           requires:
             - build-api-container
 
