@@ -19,7 +19,7 @@ jobs:
             echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
       - checkout
       - terraform/install
-      - terraform/init
+#      - terraform/init
       - terraform/apply:
           #backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
           backend_config: "storage_account_name=sarasa, container_name=sarsada, key=asdasd, resource_group_name=asdasdasd"
