@@ -56,7 +56,7 @@ jobs:
           install-kubectl: true
           perform-login: true
       - kubernetes/create-or-update-resource:
-          resource-file-path: covid-api/deployment.yaml
+          resource-file-path: covid-api/deployment.yml
           resource-name: deployment/covid-api-deployment
 
 workflows:
