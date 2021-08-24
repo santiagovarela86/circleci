@@ -51,7 +51,9 @@ jobs:
     steps:
       - checkout
       - run: docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
-      - run: docker push santiagovarela86/k8s_repository_covid-api:latest          
+      - run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker push santiagovarela86/k8s_repository_covid-api:latest          
 
   create-api-deployment:
     executor: azure-aks/default
