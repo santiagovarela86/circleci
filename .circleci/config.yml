@@ -48,6 +48,6 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-      - infra_deletion
-        requires:
-          -  infra_creation
+#      - infra_deletion:
+#          requires:
+#            -  infra_creation
