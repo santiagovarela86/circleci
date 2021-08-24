@@ -7,6 +7,26 @@ resource "azurerm_resource_group" "coviddemo" {
   }
 }
 
+resource "azurerm_log_analytics_workspace" "coviddemo" {
+  name                = "covid-law"
+  location            = azurerm_resource_group.coviddemo.location
+  resource_group_name = azurerm_resource_group.coviddemo.name
+  sku                 = "PerGB2018"
+}
+
+resource "azurerm_log_analytics_solution" "coviddemo" {
+  solution_name         = "ContainerInsights"
+  location              = azurerm_resource_group.coviddemo.location
+  resource_group_name   = azurerm_resource_group.coviddemo.name
+  workspace_resource_id = azurerm_log_analytics_workspace.coviddemo.id
+  workspace_name        = azurerm_log_analytics_workspace.coviddemo.name
+
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/ContainerInsights"
+  }
+}
+
 resource "azurerm_kubernetes_cluster" "coviddemo" {
   name                = "covid-aks"
   location            = azurerm_resource_group.coviddemo.location
@@ -32,6 +52,13 @@ resource "azurerm_kubernetes_cluster" "coviddemo" {
   network_profile {
     network_plugin    = "kubenet"
     load_balancer_sku = "Standard"
+  }
+
+  addon_profile {
+    oms_agent {
+      enabled                    = true
+      log_analytics_workspace_id = azurerm_log_analytics_workspace.coviddemo.id
+    }
   }
 
   tags = {
