@@ -21,8 +21,9 @@ jobs:
       - terraform/install
       - terraform/init
       - terraform/plan:
-          backend_config: "'resource_group_name=$SA_RG', 'storage_account_name=$SA_NAME', 'container_name=$SA_CNT_NAME', 'key=$SA_KEY'"
-#      - terraform/apply:
+          backend_config: 'resource_group_name=$SA_RG', 'storage_account_name=$SA_NAME', 'container_name=$SA_CNT_NAME', 'key=$SA_KEY'
+      - terraform/apply:
+          backend_config: 'resource_group_name=$SA_RG', 'storage_account_name=$SA_NAME', 'container_name=$SA_CNT_NAME', 'key=$SA_KEY'
 
 workflows:
   workflow:
