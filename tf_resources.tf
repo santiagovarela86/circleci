@@ -65,10 +65,9 @@ resource "azurerm_mssql_database" "coviddemo" {
   }
 }
 
-resource "azurerm_sql_firewall_rule" "coviddemo" {
+resource "azurerm_mssql_firewall_rule" "coviddemo" {
   name                = "AKS-SQL-Rule"
-  resource_group_name = azurerm_resource_group.coviddemo.name
-  server_name         = azurerm_mssql_server.coviddemo.name
+  server_id           = azurerm_mssql_server.coviddemo.id
   start_ip_address    = data.azurerm_public_ip.coviddemo.ip_address
   end_ip_address      = data.azurerm_public_ip.coviddemo.ip_address
 }
