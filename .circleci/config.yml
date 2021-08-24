@@ -45,7 +45,14 @@ jobs:
       - terraform/install
       - terraform/destroy:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
-  
+
+  build-api-container:
+    machine: true
+    steps:
+      - checkout
+      - run: docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
+      - run: docker push santiagovarela86/k8s_repository_covid-api:latest          
+
   create-api-deployment:
     executor: azure-aks/default
     steps:
@@ -58,13 +65,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: covid-api/deployment.yml
           resource-name: deployment/covid-api-deployment
-  
-  build-api-container:
-    machine: true
-    steps:
-      - checkout
-      - run: docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
-      - run: docker push santiagovarela86/k8s_repository_covid-api:latest
+          namespace: covid-k8s-test
 
 workflows:
   workflow:

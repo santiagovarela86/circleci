@@ -1,7 +1,7 @@
 FROM gradle:jdk14 as builder
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle build
+RUN gradle build -x test
 COPY ./wait-for-it.sh /home/gradle/src/build/output
 
 FROM openjdk:14-alpine
