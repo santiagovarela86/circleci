@@ -16,13 +16,15 @@ jobs:
             echo 'export ARM_SUBSCRIPTION_ID=$AZURE_SUB' >> $BASH_ENV
             echo 'export ARM_TENANT_ID=$AZURE_TENANT' >> $BASH_ENV
             echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_PW=$AZURE_SP_PASSWORD' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_AppIDPW=$AZURE_SP_PASSWORD' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_SQLADMIN=$AZURE_DB_ADMIN' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_SQLADMINPW=$AZURE_DB_ADMIN_PW' >> $BASH_ENV
       - checkout
       - terraform/install
       - terraform/apply:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
-      - terraform/destroy:
-          backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
+#      - terraform/destroy:
+#          backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
 
 workflows:
   workflow:
