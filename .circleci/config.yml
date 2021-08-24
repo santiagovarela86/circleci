@@ -58,14 +58,25 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: covid-api/deployment.yml
           resource-name: deployment/covid-api-deployment
+  
+  build-api-container:
+    machine: true
+    steps:
+      - checkout
+      - run: docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
+      - run: docker push santiagovarela86/k8s_repository_covid-api:latest
 
 workflows:
   workflow:
     jobs:
       - infra_creation
-      - create-api-deployment:
+      - build-api-container:
           requires:
             - infra_creation
+      - create-api-deployment:
+          requires:
+            - build-api-container
+
 #      - infra_deletion:
 #          requires:
 #            -  infra_creation

@@ -11,7 +11,7 @@ RUN apk add --no-cache --upgrade bash
 COPY --from=builder /home/gradle/src/build/output/application.jar /java/
 COPY --from=builder /home/gradle/src/build/output/wait-for-it.sh /java/
 RUN chmod +x /java/wait-for-it.sh
-ARG BUILD_spring_jpa_hibernate_ddl_auto=update
-ENV spring.jpa.hibernate.ddl-auto=$BUILD_spring_jpa_hibernate_ddl_auto
-ARG BUILD_spring_jpa_hibernate_use_new_id_generator_mappings=false
-ENV spring.jpa.hibernate.use-new-id-generator-mappings=$BUILD_spring_jpa_hibernate_use_new_id_generator_mappings
+#ARG BUILD_spring_jpa_hibernate_ddl_auto=update
+#ENV spring.jpa.hibernate.ddl-auto=$BUILD_spring_jpa_hibernate_ddl_auto
+#ARG BUILD_spring_jpa_hibernate_use_new_id_generator_mappings=false
+#ENV spring.jpa.hibernate.use-new-id-generator-mappings=$BUILD_spring_jpa_hibernate_use_new_id_generator_mappings
