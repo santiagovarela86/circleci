@@ -89,7 +89,7 @@ jobs:
             kubectl set env deployment/covid-api spring.jpa.hibernate.ddl-auto=update --namespace=covid-k8s
             kubectl set env deployment/covid-api spring.datasource.initialization-mode=always --namespace=covid-k8s
             kubectl set env deployment/covid-api spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=covid-k8s
-
+            kubectl set env deployment/covid-api spring.datasource.url='jdbc:sqlserver://covid-sql-devops-playground.database.windows.net:1433;databaseName=covid-sql-db-devops-playground' --namespace=covid-k8s
 workflows:
   workflow:
     jobs:
