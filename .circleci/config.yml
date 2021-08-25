@@ -70,9 +70,9 @@ jobs:
           install-kubectl: true
           perform-login: true
       - kubernetes/create-or-update-resource:
-          resource-file-path: k8s_namespace.yml
+          resource-file-path: k8s_files/namespace.yml
       - kubernetes/create-or-update-resource:
-          resource-file-path: covid-api/k8s_deployment.yml
+          resource-file-path: k8s_files/covid-api/deployment.yml
           namespace: covid-app
       - run:
           name: Set Covid API Environment Variables
