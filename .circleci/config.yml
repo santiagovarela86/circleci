@@ -100,7 +100,6 @@ jobs:
           name: Set Covid Frontend Environment Variables
           command: |
             kubectl set env deployment/covid-frontend REACT_APP_API_ADDR=http://20.69.221.64:443/ --namespace=covid-app
-            kubectl set env deployment/covid-frontend PORT=3000 --namespace=covid-app
             
 workflows:
   workflow:

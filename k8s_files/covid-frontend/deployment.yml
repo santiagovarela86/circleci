@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: covid-frontend
+        stdin: true
         image: santiagovarela86/k8s_repository_covid-frontend:latest
         command: ["npm"]
         args: ["start"]
