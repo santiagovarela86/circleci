@@ -88,9 +88,9 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-      #      - build-api-image:
-      #          requires:
-      #            - infra_creation
+      - build-api-image:
+          requires:
+            - infra_creation
       - create-k8s-resources:
           requires:
             - infra_creation
