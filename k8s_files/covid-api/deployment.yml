@@ -20,7 +20,7 @@ spec:
         command: ["java"]
         args: ["-jar", "/java/application.jar"]
         ports:
-        - containerPort: 80
+        - containerPort: 443
 ---
 apiVersion: v1
 kind: Service
@@ -33,5 +33,5 @@ spec:
   ports:
     - protocol: TCP
       name: covid-api
-      port: 80
+      port: 443
       targetPort: 8080
