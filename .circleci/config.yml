@@ -46,13 +46,14 @@ jobs:
       - terraform/destroy:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
 
-  build-api-image:
+  build-docker-images:
     machine: true
     steps:
       - checkout
       - run:
           name: Build Docker Image
-          command: docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
+          command: |
+            docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
       - run:
           name: Push Docker Image
           command: |
@@ -94,12 +95,11 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-#      - build-api-image:
-#          requires:
-#            - infra_creation
+      - build-docker-images
       - create-k8s-resources:
           requires:
+            - build-docker-images
             - infra_creation
-#      - infra_deletion:
-#          requires:
-#            -  create-k8s-resources
+      - infra_deletion:
+          requires:
+            -  create-k8s-resources
