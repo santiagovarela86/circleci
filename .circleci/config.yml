@@ -6,7 +6,7 @@ orbs:
   azure-aks: circleci/azure-aks@0.2.1
 
 jobs:
-  infra_creation:
+  setup_envvars:
     docker:
       - image: cimg/base:2021.07
     steps:
@@ -21,6 +21,11 @@ jobs:
             echo 'export TF_VAR_Azure_AppIDPW=$AZURE_SP_PASSWORD' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMIN=$AZURE_DB_ADMIN' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMINPW=$AZURE_DB_ADMIN_PW' >> $BASH_ENV
+
+  infra_creation:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
       - checkout
       - terraform/install
       - terraform/apply:
@@ -30,17 +35,6 @@ jobs:
     docker:
       - image: cimg/base:2021.07
     steps:
-      - run:
-          name: Update PATH and Define Environment Variable at Runtime
-          command: |
-            echo 'export ARM_CLIENT_ID=$AZURE_SP' >> $BASH_ENV
-            echo 'export ARM_CLIENT_SECRET=$AZURE_SP_PASSWORD' >> $BASH_ENV
-            echo 'export ARM_SUBSCRIPTION_ID=$AZURE_SUB' >> $BASH_ENV
-            echo 'export ARM_TENANT_ID=$AZURE_TENANT' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_AppID=$AZURE_SP' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_AppIDPW=$AZURE_SP_PASSWORD' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_SQLADMIN=$AZURE_DB_ADMIN' >> $BASH_ENV
-            echo 'export TF_VAR_Azure_SQLADMINPW=$AZURE_DB_ADMIN_PW' >> $BASH_ENV
       - checkout
       - terraform/install
       - terraform/destroy:
@@ -66,15 +60,18 @@ jobs:
           perform-login: true
       - kubernetes/create-or-update-resource:
           resource-file-path: k8s_namespace.yml
-          resource-name: namespaces/covid-k8s
       - kubernetes/create-or-update-resource:
           resource-file-path: covid-api/k8s_deployment.yml
-          resource-name: deployment/covid-api
           namespace: covid-k8s
+      - run: |
+          kubectl set env deployment/covid-api signing_key=asdasdasd
 
 workflows:
   workflow:
     jobs:
+      - setup_envvars:
+          requires:
+            - infra_creation
       - infra_creation
 #      - build-api-image:
 #          requires:
