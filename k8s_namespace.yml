@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: covid-k8s-test
+  name: covid-k8s
   labels:
-    name: covid-k8s-test
+    name: covid-k8s

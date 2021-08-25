@@ -46,7 +46,7 @@ jobs:
       - terraform/destroy:
           backend_config: "storage_account_name=$SA_NAME, container_name=$SA_CNT_NAME, key=$SA_KEY, resource_group_name=$SA_RG"
 
-  build-api-container:
+  build-api-image:
     machine: true
     steps:
       - checkout
@@ -66,22 +66,22 @@ jobs:
           perform-login: true
       - kubernetes/create-or-update-resource:
           resource-file-path: k8s_namespace.yml
-          resource-name: namespaces/covid-k8s-test
+          resource-name: namespaces/covid-k8s
       - kubernetes/create-or-update-resource:
           resource-file-path: covid-api/k8s_deployment.yml
-          resource-name: deployment/covid-api-deployment
-          namespace: covid-k8s-test
+          resource-name: deployment/covid-api
+          namespace: covid-k8s
 
 workflows:
   workflow:
     jobs:
       - infra_creation
-      - build-api-container:
-          requires:
-            - infra_creation
+#      - build-api-image:
+#          requires:
+#            - infra_creation
       - create-k8s-resources:
           requires:
-            - build-api-container
-#      - infra_deletion:
-#          requires:
-#            -  create-k8s-resources
+            - infra_creation
+      - infra_deletion:
+          requires:
+            -  create-k8s-resources
