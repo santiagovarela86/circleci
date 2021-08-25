@@ -51,11 +51,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build Docker Image
+          name: Build Docker Images
           command: |
             docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
       - run:
-          name: Push Docker Image
+          name: Push Docker Images
           command: |
             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
             docker push santiagovarela86/k8s_repository_covid-api:latest
@@ -95,11 +95,11 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-      - build-docker-images
+#      - build-docker-images
       - create-k8s-resources:
           requires:
-            - build-docker-images
+#            - build-docker-images
             - infra_creation
-      - infra_deletion:
-          requires:
-            -  create-k8s-resources
+#      - infra_deletion:
+#          requires:
+#            -  create-k8s-resources
