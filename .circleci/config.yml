@@ -93,7 +93,7 @@ workflows:
             - infra_creation
       - create-k8s-resources:
           requires:
-            - infra_creation
+            - build-api-image
 #      - infra_deletion:
 #          requires:
 #            -  create-k8s-resources
