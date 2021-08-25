@@ -69,10 +69,10 @@ jobs:
 workflows:
   workflow:
     jobs:
-      - setup_envvars:
+      - setup_envvars
+      - infra_creation:
           requires:
-            - infra_creation
-      - infra_creation
+            - setup_envvars
 #      - build-api-image:
 #          requires:
 #            - infra_creation
