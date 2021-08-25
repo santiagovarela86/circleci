@@ -1,7 +1,6 @@
 FROM node:13.12.0-alpine as builder
 WORKDIR /usr/src/app
 COPY . ./
-ENV PORT=3000
 RUN npm install --production
 RUN npm run build
 
