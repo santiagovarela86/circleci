@@ -27,9 +27,11 @@ kind: Service
 metadata:
   name: covid-api
 spec:
+  type: LoadBalancer
   selector:
     app: covid-api
   ports:
     - protocol: TCP
+      name: covid-api
       port: 80
       targetPort: 8080
