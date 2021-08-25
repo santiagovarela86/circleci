@@ -70,7 +70,8 @@ jobs:
           resource-file-path: covid-api/k8s_deployment.yml
           namespace: covid-k8s
       - run: |
-          kubectl set env covid-api signing_key=asdasdasd
+          kubectl get pods --namespace=covid-k8s
+#          kubectl set env covid-api signing_key=asdasdasd
 
 workflows:
   workflow:
