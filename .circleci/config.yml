@@ -83,6 +83,7 @@ jobs:
             kubectl set env deployment/covid-api covidapiaddr=https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai --namespace=covid-k8s
             kubectl set env deployment/covid-api countryloadapiaddr=https://restcountries.eu/rest/v2/all --namespace=covid-k8s
             kubectl set env deployment/covid-api mockcountrycreation=false --namespace=covid-k8s
+            kubectl set env deployment/covid-api spring.datasource.username=$AZURE_DB_ADMIN --namespace=covid-k8s
 
 workflows:
   workflow:
