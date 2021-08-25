@@ -32,6 +32,6 @@ spec:
     app: covid-api
   ports:
     - protocol: TCP
-      name: https
-      port: 443
+      name: http
+      port: 80
       targetPort: 8080
