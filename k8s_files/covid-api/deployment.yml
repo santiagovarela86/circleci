@@ -20,7 +20,7 @@ spec:
         command: ["java"]
         args: ["-jar", "/java/application.jar"]
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
