@@ -21,6 +21,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + "/isAdmin",
                 method: "GET",
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -42,6 +43,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + "/list-info?d=" + d,
                 method: "GET",
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -63,6 +65,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + "/countries",
                 method: "GET",
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -84,6 +87,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + "/users/country-lists",
                 method: "GET",
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -105,6 +109,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-lists/' + countryList.id,
                 method: 'DELETE',
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -126,6 +131,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-lists/' + countryList.id,
                 method: 'PUT',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(countryList),
                 headers: {
                     "accept": "application/json",
@@ -158,6 +164,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + "/country-lists",
                 method: "GET",
+                ignoreClientCertificate:true, 
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,
                     "accept": "application/json",
@@ -179,6 +186,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/login',
                 method: 'POST',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(loginOptions),
                 headers: {
                     "accept": "application/json",
@@ -202,6 +210,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/sign-up',
                 method: 'POST',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(registerOptions),
                 headers: {
                     "accept": "application/json",
@@ -225,6 +234,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-lists/' + id + '/plot?d=1',
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -246,6 +256,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/users',
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -267,6 +278,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-interest/' + id,
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -288,6 +300,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/countries/' + id,
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -309,6 +322,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/countries/' + country.id,
                 method: 'PUT',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(country),
                 headers: {
                     "accept": "application/json",
@@ -341,6 +355,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/users',
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -364,6 +379,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/users/all',
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -385,6 +401,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/user-information/' + id,
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -406,6 +423,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + `/list-compare?id1=${id1}&id2=${id2}`,
                 method: 'GET',
+                ignoreClientCertificate:true, 
                 headers: {
                     "accept": "application/json",
                     "Authorization": "Bearer " + RestProvider.token,
@@ -427,6 +445,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-lists/',
                 method: 'POST',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(selectedList),
                 headers: {
                     "accept": "application/json",
@@ -459,6 +478,7 @@ export default class RestProvider {
             $.ajax({
                 url: url + '/country-lists/plot',
                 method: 'POST',
+                ignoreClientCertificate:true, 
                 data: JSON.stringify(countryList),
                 headers: {
                     "Authorization": "Bearer " + RestProvider.token,

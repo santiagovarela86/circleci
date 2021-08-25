@@ -100,7 +100,6 @@ jobs:
           name: Set Covid Frontend Environment Variables
           command: |
             kubectl set env deployment/covid-frontend REACT_APP_API_ADDR=http://20.69.221.64:443/ --namespace=covid-app
-            kubectl set env deployment/covid-frontend NODE_TLS_REJECT_UNAUTHORIZED=0 --namespace=covid-app
             
 workflows:
   workflow:
@@ -111,6 +110,6 @@ workflows:
           requires:
             - build-docker-images
             - infra_creation
-      - infra_deletion:
-          requires:
-            -  create-k8s-resources
+#      - infra_deletion:
+#          requires:
+#            -  create-k8s-resources
