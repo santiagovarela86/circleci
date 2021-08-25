@@ -73,24 +73,24 @@ jobs:
           resource-file-path: k8s_namespace.yml
       - kubernetes/create-or-update-resource:
           resource-file-path: covid-api/k8s_deployment.yml
-          namespace: covid-k8s
+          namespace: covid-app
       - run:
           name: Set Covid API Environment Variables
           command: |
-            kubectl set env deployment/covid-api signing_key=$ENV_VAR_SIGN_KEY --namespace=covid-k8s
-            kubectl set env deployment/covid-api authorities_key=$ENV_VAR_AUTH_KEY --namespace=covid-k8s
-            kubectl set env deployment/covid-api issuer_token=grupo1.tacs-utn.com.ar --namespace=covid-k8s
-            kubectl set env deployment/covid-api access_token_validity_seconds=28800 --namespace=covid-k8s
-            kubectl set env deployment/covid-api covidapiaddr=https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai --namespace=covid-k8s
-            kubectl set env deployment/covid-api countryloadapiaddr=https://restcountries.eu/rest/v2/all --namespace=covid-k8s
-            kubectl set env deployment/covid-api mockcountrycreation=false --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.datasource.username=$AZURE_DB_ADMIN --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.datasource.password=$AZURE_DB_ADMIN_PW --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.h2.console.enabled=false --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.jpa.hibernate.ddl-auto=update --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.datasource.initialization-mode=always --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=covid-k8s
-            kubectl set env deployment/covid-api spring.datasource.url='jdbc:sqlserver://covid-sql-devops-playground.database.windows.net:1433;databaseName=covid-sql-db-devops-playground' --namespace=covid-k8s
+            kubectl set env deployment/covid-api signing_key=$ENV_VAR_SIGN_KEY --namespace=covid-app
+            kubectl set env deployment/covid-api authorities_key=$ENV_VAR_AUTH_KEY --namespace=covid-app
+            kubectl set env deployment/covid-api issuer_token=grupo1.tacs-utn.com.ar --namespace=covid-app
+            kubectl set env deployment/covid-api access_token_validity_seconds=28800 --namespace=covid-app
+            kubectl set env deployment/covid-api covidapiaddr=https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai --namespace=covid-app
+            kubectl set env deployment/covid-api countryloadapiaddr=https://restcountries.eu/rest/v2/all --namespace=covid-app
+            kubectl set env deployment/covid-api mockcountrycreation=false --namespace=covid-app
+            kubectl set env deployment/covid-api spring.datasource.username=$AZURE_DB_ADMIN --namespace=covid-app
+            kubectl set env deployment/covid-api spring.datasource.password=$AZURE_DB_ADMIN_PW --namespace=covid-app
+            kubectl set env deployment/covid-api spring.h2.console.enabled=false --namespace=covid-app
+            kubectl set env deployment/covid-api spring.jpa.hibernate.ddl-auto=update --namespace=covid-app
+            kubectl set env deployment/covid-api spring.datasource.initialization-mode=always --namespace=covid-app
+            kubectl set env deployment/covid-api spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=covid-app
+            kubectl set env deployment/covid-api spring.datasource.url='jdbc:sqlserver://covid-sql-devops-playground.database.windows.net:1433;databaseName=covid-sql-db-devops-playground' --namespace=covid-app
 workflows:
   workflow:
     jobs:
