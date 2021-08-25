@@ -99,16 +99,16 @@ jobs:
       - run:
           name: Set Covid Frontend Environment Variables
           command: |
-            kubectl set env deployment/covid-frontend REACT_APP_API_ADDR=http://20.69.221.64:443/ --namespace=covid-app
-            
+            kubectl set env deployment/covid-frontend REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=covid-app
+
 workflows:
   workflow:
     jobs:
       - infra_creation
-      - build-docker-images
+#      - build-docker-images
       - create-k8s-resources:
           requires:
-            - build-docker-images
+#            - build-docker-images
             - infra_creation
 #      - infra_deletion:
 #          requires:
