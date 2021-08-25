@@ -95,12 +95,12 @@ workflows:
   workflow:
     jobs:
       - infra_creation
-      - build-api-image:
-          requires:
-            - infra_creation
+#      - build-api-image:
+#          requires:
+#            - infra_creation
       - create-k8s-resources:
           requires:
-            - build-api-image
+            - infra_creation
 #      - infra_deletion:
 #          requires:
 #            -  create-k8s-resources
