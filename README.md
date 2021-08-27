@@ -1,4 +1,4 @@
-# DevOps Playground Repo
+# DevOps Playground Repo (Azure Version)
 
 I've created this repository to try out multiple DevOps/Azure tools at once such as CircleCI, Kubernetes (Azure's AKS), Terraform, Docker, etc.
 
