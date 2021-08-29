@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   terraform: circleci/terraform@2.1.0
   kubernetes: circleci/kubernetes@0.12.0
-  azure-aks: circleci/azure-aks@0.2.1
+  azure-aks: circleci/azure-aks@0.3.0
 
 jobs:
   infra_creation:
