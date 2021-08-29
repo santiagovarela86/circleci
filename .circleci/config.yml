@@ -104,6 +104,8 @@ jobs:
             helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
             helm repo update
             helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
+      - kubernetes/create-or-update-resource:
+          resource-file-path: $K8S_FOLDER/ingress.yml
       - run:
           name: Set Covid API Environment Variables
           command: |
@@ -125,7 +127,7 @@ jobs:
           name: Set Covid Frontend Environment Variables
           command: |
             export VAR_INGRESS_IP=$(kubectl -n $COVID_NAMESPACE get svc ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip -r)
-            kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=https://$VAR_INGRESS_IP/API --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=https://$VAR_INGRESS_IP/api --namespace=$COVID_NAMESPACE
 
 workflows:
   workflow:

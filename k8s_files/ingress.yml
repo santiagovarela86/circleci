@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: covid-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 443
+          - path: /api/
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-api
+                port:
+                  number: 443
