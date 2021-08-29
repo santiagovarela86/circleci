@@ -135,10 +135,10 @@ workflows:
     jobs:
       - infra_creation
 #      - build-docker-images
-      - create-k8s-resources:
-          requires:
-#            - build-docker-images
-            - infra_creation
+#      - create-k8s-resources:
+#          requires:
+##            - build-docker-images
+#            - infra_creation
 #      - azure-aks/install-helm-on-cluster:
 #          resource-group: $AZURE_RGNAME
 #          cluster-name: $AZURE_AKS_NAME
