@@ -107,28 +107,28 @@ jobs:
             kubectl set env deployment/$COVID_API_NAME spring.jpa.hibernate.ddl-auto=update --namespace=$COVID_NAMESPACE
             kubectl set env deployment/$COVID_API_NAME spring.datasource.initialization-mode=always --namespace=$COVID_NAMESPACE
             kubectl set env deployment/$COVID_API_NAME spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=$COVID_NAMESPACE
-            kubectl set env deployment/$COVID_API_NAME spring.datasource.url="jdbc:sqlserver://$AZURE_DB_SERVER.database.windows.net:1433;databaseName=$AZURE_DB_NAME" --namespace=$COVID_NAMESPACE
+###            kubectl set env deployment/$COVID_API_NAME spring.datasource.url="jdbc:sqlserver://$AZURE_DB_SERVER.database.windows.net:1433;databaseName=$AZURE_DB_NAME" --namespace=$COVID_NAMESPACE
       - run:
           name: Set Covid Frontend Environment Variables
           command: |
             kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=$COVID_NAMESPACE
 
-  create-ingress-controller:
-    executor: azure-aks/default
-    steps:
-      - checkout
-      - azure-aks/update-kubeconfig-with-credentials:
-          resource-group: $AZURE_RGNAME
-          cluster-name: $AZURE_AKS_NAME
-          install-kubectl: true
-          perform-login: true
-      - run:
-          name: Install an Ingress Controller using Helm
-          command: |
-            NAMESPACE=$COVID_NAMESPACE
-            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-            helm repo update
-            helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
+#  create-ingress-controller:
+#    executor: azure-aks/default
+#    steps:
+#      - checkout
+#      - azure-aks/update-kubeconfig-with-credentials:
+#          resource-group: $AZURE_RGNAME
+#          cluster-name: $AZURE_AKS_NAME
+#          install-kubectl: true
+#          perform-login: true
+#      - run:
+#          name: Install an Ingress Controller using Helm
+#          command: |
+#            NAMESPACE=$COVID_NAMESPACE
+#            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+#            helm repo update
+#            helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
 
 workflows:
   workflow:
@@ -139,14 +139,14 @@ workflows:
           requires:
 #            - build-docker-images
             - infra_creation
-      - azure-aks/install-helm-on-cluster:
-          resource-group: $AZURE_RGNAME
-          cluster-name: $AZURE_AKS_NAME
-          requires:
-            - create-k8s-resources
-      - create-ingress-controller:
-          requires:
-            - azure-aks/install-helm-on-cluster
+#      - azure-aks/install-helm-on-cluster:
+#          resource-group: $AZURE_RGNAME
+#          cluster-name: $AZURE_AKS_NAME
+#          requires:
+#            - create-k8s-resources
+#      - create-ingress-controller:
+#          requires:
+#            - azure-aks/install-helm-on-cluster
 #      - infra_deletion:
 #          requires:
 #            -  create-k8s-resources
