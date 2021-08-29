@@ -125,7 +125,7 @@ jobs:
           name: Set Covid Frontend Environment Variables
           command: |
             export VAR_INGRESS_IP=$(kubectl -n $COVID_NAMESPACE get svc ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[0].ip -r)
-            kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=http://VAR_INGRESS_IP:443 --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=https://$VAR_INGRESS_IP/API --namespace=$COVID_NAMESPACE
 
 workflows:
   workflow:
