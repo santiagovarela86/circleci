@@ -4,6 +4,7 @@ orbs:
   terraform: circleci/terraform@2.1.0
   kubernetes: circleci/kubernetes@0.12.0
   azure-aks: circleci/azure-aks@0.3.0
+  helm: circleci/helm@1.2.0
 
 jobs:
   infra_creation:
@@ -112,6 +113,7 @@ jobs:
           name: Set Covid Frontend Environment Variables
           command: |
             kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=$COVID_NAMESPACE
+      - helm/install-helm-on-cluster
 
   create-ingress-controller:
     executor: azure-aks/default
