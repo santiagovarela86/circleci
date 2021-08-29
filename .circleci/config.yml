@@ -106,6 +106,7 @@ jobs:
             helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
       - kubernetes/create-or-update-resource:
           resource-file-path: $K8S_FOLDER/ingress.yml
+          namespace: $COVID_NAMESPACE
       - run:
           name: Set Covid API Environment Variables
           command: |
