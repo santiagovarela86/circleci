@@ -27,11 +27,11 @@ kind: Service
 metadata:
   name: covid-api
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: covid-api
   ports:
     - protocol: TCP
       name: https
-      port: 443
+      port: 8080
       targetPort: 8080

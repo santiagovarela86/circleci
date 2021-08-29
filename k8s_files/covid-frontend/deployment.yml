@@ -28,7 +28,7 @@ kind: Service
 metadata:
   name: covid-frontend
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: covid-frontend
   ports:
