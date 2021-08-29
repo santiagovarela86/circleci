@@ -6,13 +6,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Exact
-            backend:
-              service:
-                name: covid-frontend
-                port:
-                  number: 443
+#          - path: /
+#            pathType: Exact
+#            backend:
+#              service:
+#                name: covid-frontend
+#                port:
+#                  number: 443
           - path: /api/
             pathType: Prefix
             backend:
