@@ -114,6 +114,14 @@ jobs:
             kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=$COVID_NAMESPACE
 
   create-ingress-controller:
+    executor: azure-aks/default
+    steps:
+      - checkout
+        - azure-aks/update-kubeconfig-with-credentials:
+        resource-group: $AZURE_RGNAME
+        cluster-name: $AZURE_AKS_NAME
+        install-kubectl: true
+        perform-login: true
       - run:
           name: Install an Ingress Controller using Helm
           command: |
