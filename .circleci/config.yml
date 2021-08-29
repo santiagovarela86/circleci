@@ -21,6 +21,12 @@ jobs:
             echo 'export TF_VAR_Azure_AppIDPW=$AZURE_SP_PASSWORD' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMIN=$AZURE_DB_ADMIN' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMINPW=$AZURE_DB_ADMIN_PW' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_RGNAME=$AZURE_RGNAME' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_TAG_ENV=$AZURE_ENVIRONMENT' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_REGION=$AZURE_REGION' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_DB_NAME=$AZURE_DB_NAME' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_DB_SERVER=$AZURE_DB_SERVER' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_AKS_NAME=$AZURE_AKS_NAME' >> $BASH_ENV
       - checkout
       - terraform/install
       - terraform/apply:
@@ -41,6 +47,12 @@ jobs:
             echo 'export TF_VAR_Azure_AppIDPW=$AZURE_SP_PASSWORD' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMIN=$AZURE_DB_ADMIN' >> $BASH_ENV
             echo 'export TF_VAR_Azure_SQLADMINPW=$AZURE_DB_ADMIN_PW' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_RGNAME=$AZURE_RGNAME' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_TAG_ENV=$AZURE_ENVIRONMENT' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_REGION=$AZURE_REGION' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_DB_NAME=$AZURE_DB_NAME' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_DB_SERVER=$AZURE_DB_SERVER' >> $BASH_ENV
+            echo 'export TF_VAR_Azure_AKS_NAME=$AZURE_AKS_NAME' >> $BASH_ENV
       - checkout
       - terraform/install
       - terraform/destroy:
@@ -53,8 +65,8 @@ jobs:
       - run:
           name: Build Docker Images
           command: |
-            docker build -t santiagovarela86/k8s_repository_covid-api:latest covid-api
-            docker build -t santiagovarela86/k8s_repository_covid-frontend:latest covid-frontend
+            docker build -t santiagovarela86/k8s_repository_covid-api:latest $COVID_API_NAME
+            docker build -t santiagovarela86/k8s_repository_covid-frontend:latest $COVID_FRONTEND_NAME
       - run:
           name: Push Docker Images
           command: |
@@ -67,39 +79,46 @@ jobs:
     steps:
       - checkout
       - azure-aks/update-kubeconfig-with-credentials:
-          resource-group: COVIDDEMO
-          cluster-name: covid-aks
+          resource-group: $AZURE_RGNAME
+          cluster-name: $AZURE_AKS_NAME
           install-kubectl: true
           perform-login: true
       - kubernetes/create-or-update-resource:
-          resource-file-path: k8s_files/namespace.yml
+          resource-file-path: $K8S_FOLDER/namespace.yml
       - kubernetes/create-or-update-resource:
-          resource-file-path: k8s_files/covid-api/deployment.yml
-          namespace: covid-app
+          resource-file-path: $K8S_FOLDER/$COVID_API_NAME/deployment.yml
+          namespace: $COVID_NAMESPACE
       - kubernetes/create-or-update-resource:
-          resource-file-path: k8s_files/covid-frontend/deployment.yml
-          namespace: covid-app
+          resource-file-path: $K8S_FOLDER/$COVID_FRONTEND_NAME/deployment.yml
+          namespace: $COVID_NAMESPACE
       - run:
           name: Set Covid API Environment Variables
           command: |
-            kubectl set env deployment/covid-api signing_key=$ENV_VAR_SIGN_KEY --namespace=covid-app
-            kubectl set env deployment/covid-api authorities_key=$ENV_VAR_AUTH_KEY --namespace=covid-app
-            kubectl set env deployment/covid-api issuer_token=grupo1.tacs-utn.com.ar --namespace=covid-app
-            kubectl set env deployment/covid-api access_token_validity_seconds=28800 --namespace=covid-app
-            kubectl set env deployment/covid-api covidapiaddr=https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai --namespace=covid-app
-            kubectl set env deployment/covid-api countryloadapiaddr=https://restcountries.eu/rest/v2/all --namespace=covid-app
-            kubectl set env deployment/covid-api mockcountrycreation=false --namespace=covid-app
-            kubectl set env deployment/covid-api spring.datasource.username=$AZURE_DB_ADMIN --namespace=covid-app
-            kubectl set env deployment/covid-api spring.datasource.password=$AZURE_DB_ADMIN_PW --namespace=covid-app
-            kubectl set env deployment/covid-api spring.h2.console.enabled=false --namespace=covid-app
-            kubectl set env deployment/covid-api spring.jpa.hibernate.ddl-auto=update --namespace=covid-app
-            kubectl set env deployment/covid-api spring.datasource.initialization-mode=always --namespace=covid-app
-            kubectl set env deployment/covid-api spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=covid-app
-            kubectl set env deployment/covid-api spring.datasource.url='jdbc:sqlserver://covid-sql-devops-playground.database.windows.net:1433;databaseName=covid-sql-db-devops-playground' --namespace=covid-app
+            kubectl set env deployment/$COVID_API_NAME signing_key=$ENV_VAR_SIGN_KEY --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME authorities_key=$ENV_VAR_AUTH_KEY --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME issuer_token=grupo1.tacs-utn.com.ar --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME access_token_validity_seconds=28800 --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME covidapiaddr=https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME countryloadapiaddr=https://restcountries.eu/rest/v2/all --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME mockcountrycreation=false --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.datasource.username=$AZURE_DB_ADMIN --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.datasource.password=$AZURE_DB_ADMIN_PW --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.h2.console.enabled=false --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.jpa.hibernate.ddl-auto=update --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.datasource.initialization-mode=always --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME spring.datasource.url='jdbc:sqlserver://$AZURE_DB_SERVER.database.windows.net:1433;databaseName=$AZURE_DB_NAME' --namespace=$COVID_NAMESPACE
       - run:
           name: Set Covid Frontend Environment Variables
           command: |
-            kubectl set env deployment/covid-frontend REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=covid-app
+            kubectl set env deployment/$COVID_FRONTEND_NAME REACT_APP_API_ADDR=http://40.65.233.169:443 --namespace=$COVID_NAMESPACE
+      - run:
+          name: Install an Ingress Controller using Helm
+          command: |
+            NAMESPACE=$COVID_NAMESPACE
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+            helm repo update
+            helm install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
 
 workflows:
   workflow:

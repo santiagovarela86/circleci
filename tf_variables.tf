@@ -13,3 +13,27 @@ variable "Azure_SQLADMIN" {
 variable "Azure_SQLADMINPW" {
   description = "Azure SQL Admin Password"
 }
+
+variable "Azure_RGNAME" {
+  description = "Azure Resource Group Name"
+}
+
+variable "Azure_TAG_ENV" {
+  description = "Azure Environment Tag"
+}
+
+variable "Azure_REGION" {
+  description = "Azure Region"
+}
+
+variable "Azure_DB_NAME" {
+  description = "Azure DB Name"
+}
+
+variable "Azure_DB_SERVER" {
+  description = "Azure DB Server Name"
+}
+
+variable "Azure_AKS_NAME" {
+  description = "Azure AKS Name"
+}

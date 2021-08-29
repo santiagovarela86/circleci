@@ -1,9 +1,9 @@
 resource "azurerm_resource_group" "coviddemo" {
-  name     = "COVIDDEMO"
-  location = "East US 2"
+  name     = var.Azure_RGNAME
+  location = var.Azure_REGION
 
   tags = {
-    environment = "Covid Demo"
+    environment = var.Azure_TAG_ENV
   }
 }
 
@@ -28,10 +28,10 @@ resource "azurerm_log_analytics_solution" "coviddemo" {
 }
 
 resource "azurerm_kubernetes_cluster" "coviddemo" {
-  name                = "covid-aks"
+  name                = var.Azure_AKS_NAME
   location            = azurerm_resource_group.coviddemo.location
   resource_group_name = azurerm_resource_group.coviddemo.name
-  dns_prefix          = "covid-aks"
+  dns_prefix          = var.Azure_AKS_NAME
 
   default_node_pool {
     name            = "nodepool"
@@ -62,12 +62,12 @@ resource "azurerm_kubernetes_cluster" "coviddemo" {
   }
 
   tags = {
-    environment = "Covid Demo"
+    environment = var.Azure_TAG_ENV
   }
 }
 
 resource "azurerm_mssql_server" "coviddemo" {
-  name                         = "covid-sql-devops-playground"
+  name                         = var.Azure_DB_SERVER
   resource_group_name          = azurerm_resource_group.coviddemo.name
   location                     = azurerm_resource_group.coviddemo.location
   version                      = "12.0"
@@ -76,19 +76,19 @@ resource "azurerm_mssql_server" "coviddemo" {
   minimum_tls_version          = 1.2
 
   tags = {
-    environment = "Covid Demo"
+    environment = var.Azure_TAG_ENV
   }
 }
 
 resource "azurerm_mssql_database" "coviddemo" {
-  name           = "covid-sql-db-devops-playground"
+  name           = var.Azure_DB_NAME
   server_id      = azurerm_mssql_server.coviddemo.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   sku_name       = "Basic"
   max_size_gb    = 2
 
   tags = {
-    environment = "Covid Demo"
+    environment = var.Azure_TAG_ENV
   }
 }
 
