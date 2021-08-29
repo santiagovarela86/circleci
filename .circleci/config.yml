@@ -117,11 +117,11 @@ jobs:
     executor: azure-aks/default
     steps:
       - checkout
-        - azure-aks/update-kubeconfig-with-credentials:
-        resource-group: $AZURE_RGNAME
-        cluster-name: $AZURE_AKS_NAME
-        install-kubectl: true
-        perform-login: true
+      - azure-aks/update-kubeconfig-with-credentials:
+          resource-group: $AZURE_RGNAME
+          cluster-name: $AZURE_AKS_NAME
+          install-kubectl: true
+          perform-login: true
       - run:
           name: Install an Ingress Controller using Helm
           command: |
