@@ -4,6 +4,7 @@ metadata:
   name: covid-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/default-backend: "covid-frontend:3000"
 spec:
   rules:
     - http:
