@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.headers().frameOptions().deny()
                 //.and()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/login", "/sign-up", "/health").permitAll()
+                .authorizeRequests().antMatchers("/api/login", "/api/sign-up", "/api/health").permitAll()
                 // all other requests need to be authenticated
                 .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
