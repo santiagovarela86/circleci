@@ -8,6 +8,13 @@ spec:
   rules:
     - http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-api
+                port:
+                  number: 8080
           - path: /covid
             pathType: Prefix
             backend:
@@ -22,10 +29,10 @@ spec:
                 name: covid-frontend
                 port:
                   number: 3000
-          - path: /api
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: covid-api
+                name: covid-frontend
                 port:
-                  number: 8080
+                  number: 3000
