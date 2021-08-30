@@ -8,8 +8,8 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Exact
+          - path: /covid
+            pathType: Prefix
             backend:
               service:
                 name: covid-frontend
