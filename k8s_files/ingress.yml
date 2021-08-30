@@ -14,6 +14,97 @@ spec:
                 name: covid-frontend
                 port:
                   number: 3000
+          - path: /recovery
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /register
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /logout
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /home
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /compare
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /myuser
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /plot
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /compare-strategies
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /countryinterest
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /countrylistreport
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /paises
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
           - path: /static
             pathType: Prefix
             backend:
@@ -42,18 +133,3 @@ metadata:
   name: nginx
 spec:
   controller: k8s.io/ingress-nginx
-
-#          - path: /covid
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: covid-frontend
-#                port:
-#                  number: 3000
-#          - path: /static
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: covid-frontend
-#                port:
-#                  number: 3000
