@@ -140,6 +140,6 @@ workflows:
           requires:
 #            - build-docker-images
             - infra_creation
-#      - infra_deletion:
-#          requires:
-#            -  create-k8s-resources
+      - infra_deletion:
+          requires:
+            -  create-k8s-resources
