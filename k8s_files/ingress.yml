@@ -7,6 +7,20 @@ spec:
   rules:
     - http:
         paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
+          - path: /static
+            pathType: Prefix
+            backend:
+              service:
+                name: covid-frontend
+                port:
+                  number: 3000
           - path: /api
             pathType: Prefix
             backend:
@@ -18,9 +32,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: covid-frontend
+                name: covid-api
                 port:
-                  number: 3000
+                  number: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
