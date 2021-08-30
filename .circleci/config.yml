@@ -103,7 +103,7 @@ jobs:
             NAMESPACE=$COVID_NAMESPACE
             helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
             helm repo update
-            helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE
+            helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --create-namespace --namespace $NAMESPACE --set controller.replicaCount=2
       - kubernetes/create-or-update-resource:
           resource-file-path: $K8S_FOLDER/ingress.yml
           namespace: $COVID_NAMESPACE
