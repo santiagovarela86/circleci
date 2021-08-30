@@ -124,7 +124,7 @@ jobs:
             kubectl set env deployment/$COVID_API_NAME spring.datasource.initialization-mode=always --namespace=$COVID_NAMESPACE
             kubectl set env deployment/$COVID_API_NAME spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect --namespace=$COVID_NAMESPACE
             kubectl set env deployment/$COVID_API_NAME spring.datasource.url="jdbc:sqlserver://$AZURE_DB_SERVER.database.windows.net:1433;databaseName=$AZURE_DB_NAME" --namespace=$COVID_NAMESPACE
-            kubectl set env deployment/$COVID_API_NAME spring.data.rest.basePath=/api --namespace=$COVID_NAMESPACE
+            kubectl set env deployment/$COVID_API_NAME server.contextPath=/api --namespace=$COVID_NAMESPACE
       - run:
           name: Set Covid Frontend Environment Variables
           command: |
