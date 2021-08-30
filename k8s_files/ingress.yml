@@ -15,20 +15,20 @@ spec:
                 name: covid-api
                 port:
                   number: 8080
-          - path: /covid
-            pathType: Prefix
-            backend:
-              service:
-                name: covid-frontend
-                port:
-                  number: 3000
-          - path: /static
-            pathType: Prefix
-            backend:
-              service:
-                name: covid-frontend
-                port:
-                  number: 3000
+#          - path: /covid
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: covid-frontend
+#                port:
+#                  number: 3000
+#          - path: /static
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: covid-frontend
+#                port:
+#                  number: 3000
           - path: /
             pathType: Prefix
             backend:
